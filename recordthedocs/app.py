@@ -12,7 +12,7 @@ from recordthedocs.extensions import (
     migrate,
     debug_toolbar,
 )
-from recordthedocs import public, user
+from recordthedocs import public, user, project
 
 
 def create_app(config_object=ProdConfig):
@@ -43,6 +43,7 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
+    app.register_blueprint(project.views.blueprint)
     return None
 
 

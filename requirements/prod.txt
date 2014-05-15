@@ -1,4 +1,5 @@
 # Everything needed in production
+docutils
 
 # Flask
 Flask==0.10.1

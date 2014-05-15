@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>The start is {{ repo_url }}</h1>
+    <p>{{ repo.branches }}</p>
+    <p>{{repo.modified_files}} </p>
+    
+<div id="content_pane" class="editable">
+    {% autoescape false %}
+        {{ initial_content }}
+    {% endautoescape %}
+</div>
+
+<textarea id="source">
+</textarea>
+{% endblock %}
+{% block js %}
+<script>
+    jQuery(document).ready(function() {
+      // Enable Hallo editor
+      jQuery('.editable').hallo({
+        plugins: {
+          'halloformat': {},
+          'halloheadings': {},
+          'hallolists': {},
+          'halloreundo': {}
+        },
+        toolbar: 'halloToolbarFixed'
+      });
+    
+      var markdownize = function(content) {
+        var html = content.split("\n").map($.trim).filter(function(line) { 
+          return line != "";
+        }).join("\n");
+        return toRST(html);
+      };
+    
+    
+      // Method that converts the HTML contents to Markdown
+      var showSource = function(content) {
+        var markdown = markdownize(content);
+        if (jQuery('#source').get(0).value == markdown) {
+          return;
+        }
+        jQuery('#source').get(0).value = markdown;
+      };
+    
+
+    
+      //Update Markdown every time content is modified
+      jQuery('.editable').bind('hallomodified', function(event, data) {
+        showSource(data.content);
+      });
+      showSource(jQuery('.editable').html());
+    }); 
+</script>
+{% endblock %}
