@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Editing {{ page_title }}</h1>
+    
+<div id="initial" style="display:none">
+    {{ initial_content }}
+</div>
+<div id="content_pane" class="editable">
+{% autoescape false %}
+    
+{% endautoescape %}
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    jQuery(document).ready(function() {
+      // Enable Hallo editor
+      document.getElementById('content_pane').innerHTML = markdown.toHTML(document.getElementById('initial').innerHTML)
+      jQuery('.editable').hallo({
+        plugins: {
+          'halloformat': {},
+          'halloheadings': {},
+          'hallolists': {},
+          'halloreundo': {}
+        },
+        toolbar: 'halloToolbarFixed'
+      });
+    
+      var markdownize = function(content) {
+        var html = content.split("\n").map($.trim).filter(function(line) { 
+          return line != "";
+        }).join("\n");
+        return toRST(html);
+      };
+    
+    
+      // Method that converts the HTML contents to Markdown
+      var showSource = function(content) {
+        var markdown = markdownize(content);
+        if (jQuery('#source').get(0).value == markdown) {
+          return;
+        }
+        jQuery('#source').get(0).value = markdown;
+      };
+    
+
+    
+      //Update Markdown every time content is modified
+    //   jQuery('.editable').bind('hallomodified', function(event, data) {
+    //     showSource(data.content);
+    //   });
+    //   showSource(jQuery('.editable').html());
+    }); 
+</script>
+{% endblock %}

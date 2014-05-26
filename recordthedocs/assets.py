@@ -12,6 +12,12 @@ js = Bundle(
     "libs/jQuery/dist/jquery.js",
     "libs/bootstrap/dist/js/bootstrap.js",
     "js/plugins.js",
+    "libs/jqueryui/ui/jquery-ui.js",
+    "libs/rangy/rangy-core.js",
+    "libs/hallo/dist/hallo.js",
+    "js/rst2html.js",
+    "js/html2rst.js",
+    "libs/markdown-browser-0.6.0-beta1/markdown.js",
     filters='jsmin',
     output="public/js/common.js"
 )

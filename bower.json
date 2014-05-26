@@ -2,6 +2,9 @@
   "name": "recordthedocs",
   "dependencies": {
     "bootstrap": ">=3.1.1",
-    "jQuery": ">=1.9.0"
+    "jQuery": ">=1.9.0",
+    "jqueryui": "",
+    "rangy": "",
+    "hallo": ""
   }
 }
