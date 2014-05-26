@@ -62,7 +62,6 @@ var toRST = function(string) {
     {
       patterns: ['div', 'span'],
       replacement: function(str, attrs, innerHTML) {
-          console.log(attrs + " ||| " + str)
         return "\n" + innerHTML + "\n";
       }
     },
@@ -185,7 +184,7 @@ var toRST = function(string) {
   }
   
   function cleanUp(string) {
-    string = string.replace(/^[\t\r\n]+|[\t\r\n]+$/g, ''); // trim leading/trailing whitespace
+    //string = string.replace(/^[\t\r\n]+|[\t\r\n]+$/g, ''); // trim leading/trailing whitespace
     string = string.replace(/\n\s+\n/g, '\n\n');
     string = string.replace(/\n{3,}/g, '\n\n'); // limit consecutive linebreaks to 2
     return string;
