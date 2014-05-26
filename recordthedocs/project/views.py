@@ -16,15 +16,17 @@ def whole_project(repo_url):
     
     repo_path = '/tmp/gittle_bare'
     repo = Gittle(repo_path)
+    #repo = Gittle.clone(repo_url, repo_path)
     with open('%s/docs/index.rst' % repo_path, 'r') as index_page:
         file_content = index_page.read()
-    initial_content = rst2html(file_content)
+    #initial_content = rst2html(file_content)
     #except:
-    #    repo = Gittle.clone(repo_url, repo_path)
+    #    
     return render_template("project/home.html", 
         repo_url=repo_url, 
         repo=repo, 
-        initial_content=initial_content
+        initial_content=file_content,
+        page_title="index.rst"
     )
     
 def rst2html(rst_content):

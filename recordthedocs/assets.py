@@ -17,6 +17,7 @@ js = Bundle(
     "libs/hallo/dist/hallo.js",
     "js/rst2html.js",
     "js/html2rst.js",
+    "libs/markdown-browser-0.6.0-beta1/markdown.js",
     filters='jsmin',
     output="public/js/common.js"
 )
