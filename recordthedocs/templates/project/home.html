@@ -2,20 +2,19 @@
 {% block content %}
     <h1>Editing {{ page_title }}</h1>
     
-<div id="initial" style="display:none">
-    {{ initial_content }}
-</div>
 <div id="content_pane" class="editable">
 {% autoescape false %}
-    
+    {{ initial_content }}   
 {% endautoescape %}
 </div>
+<textarea id="source">
+Test
+</textarea>
 {% endblock %}
 {% block js %}
 <script>
     jQuery(document).ready(function() {
       // Enable Hallo editor
-      document.getElementById('content_pane').innerHTML = markdown.toHTML(document.getElementById('initial').innerHTML)
       jQuery('.editable').hallo({
         plugins: {
           'halloformat': {},
@@ -23,7 +22,7 @@
           'hallolists': {},
           'halloreundo': {}
         },
-        toolbar: 'halloToolbarFixed'
+        //toolbar: 'halloToolbarFixed'
       });
     
       var markdownize = function(content) {
@@ -40,16 +39,15 @@
         if (jQuery('#source').get(0).value == markdown) {
           return;
         }
-        jQuery('#source').get(0).value = markdown;
+        jQuery('#source').get(0).innerHTML = markdown;
       };
     
 
-    
-      //Update Markdown every time content is modified
-    //   jQuery('.editable').bind('hallomodified', function(event, data) {
-    //     showSource(data.content);
-    //   });
-    //   showSource(jQuery('.editable').html());
+
+      jQuery('.editable').bind('hallomodified', function(event, data) {
+        showSource(data.content);
+      });
+      showSource(jQuery('.editable').html());
     }); 
 </script>
 {% endblock %}
